@@ -1,0 +1,21 @@
+{
+  "common": {
+    "error": "Something went wrong\nPlease try again later.",
+    "ups": "Oops!"
+  },
+  "welcomeScreen": {
+    "title": "Welcome",
+    "subtitle": "Log in to your account to stay up\nto date with the community.",
+    "welcomeButton": "Get started"
+  },
+  "loginScreen": {
+    "insertData": "Enter the data to login",
+    "loginButton": "Login",
+    "forgotPassword": "Forgot password",
+    "loginButtonError": "Accept",
+    "errorMessage": "Please fill in all fields to continue",
+    "errorEmail": "Provide a valid email address",
+    "errorPassword": "Password must be at least 8 characters long",
+    "areuSure": "Are you sure you want to log out?"
+  }
+}

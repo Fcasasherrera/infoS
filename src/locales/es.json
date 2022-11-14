@@ -1,0 +1,21 @@
+{
+  "common": {
+    "error": "Algo salió mal\nIntente más tarde",
+    "ups": "Ups!"
+  },
+  "welcomeScreen": {
+    "title": "Bienvenido",
+    "subtitle": "Ingresa a tu cuenta para estar\nal día con la comunidad.",
+    "welcomeButton": "Comenzar"
+  },
+  "loginScreen": {
+    "insertData": "Ingresa los datos para iniciar",
+    "loginButton": "Iniciar sesión",
+    "forgotPassword": "Olvidé mi contraseña",
+    "loginButtonError": "Aceptar",
+    "errorMessage": "Favor de llenar todos los campos para continuar",
+    "errorEmail": "Ingresa un correo válido",
+    "errorPassword": "La contraseña debe tener al menos 8 caracteres",
+    "areuSure": "¿Estas seguro de que quieres cerrar sesión?"
+  }
+}
