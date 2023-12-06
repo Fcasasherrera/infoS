@@ -175,7 +175,7 @@ flex-direction: row;
       ? props.theme.errorBor
       : props.theme.inputBor}
   padding: 13.5px 10px 13.5px 16px;
-  border-radius: 50px;
+  border-radius: 16px;
 `;
 export const InputIconView = styled.View`
   position: relative;

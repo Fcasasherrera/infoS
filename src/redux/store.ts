@@ -1,10 +1,16 @@
 import {configureStore} from '@reduxjs/toolkit';
 import loginReducer from './auth/login/LoginReducer';
+import requestsReducer from './requests/RequestReducers';
+import communiquesReducer from './communiques/CommuniquesReducer';
+import NotificationsReducer from './notifications/NotificationsReducers';
 // ...
 
 export const store = configureStore({
   reducer: {
     login: loginReducer,
+    requests: requestsReducer,
+    communiques: communiquesReducer,
+    notifications: NotificationsReducer,
   },
 });
 

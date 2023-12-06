@@ -19,8 +19,8 @@ const LoginScreen: FC = () => {
   const dispacth = useAppDispatch();
   const {loading, error, errorMessage} = useAppSelector(loginSelector);
   const [form, onChange] = useState({
-    username: 'eduardo.diz@atomic32.com',
-    password: 'atomic32',
+    username: 'fcasasherrera@gmail.com',
+    password: '123456',
     checkTextInputChange: false,
     isValidEmail: true,
     isValidPassword: true,
@@ -118,7 +118,7 @@ const LoginScreen: FC = () => {
             />
 
             <Button
-              isLoading={loading}
+              // isLoading={loading}
               onPress={() => {}}
               style={{alignSelf: 'flex-end'}}
               link>

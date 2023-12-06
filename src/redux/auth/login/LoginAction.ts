@@ -15,13 +15,28 @@ export const LoginAction = createAsyncThunk('SET_LOGIN', async (body: Body) => {
         errorMessage: 'loginScreen.errorMessage',
       };
     }
-    const data = {...body};
-    const url: string = 'sessions/login';
-    const response = await CustomAxios.post(url, data);
-    console.log('RESP LOGIN => ', response.data);
-    const user = response?.data?.session?.user ?? {};
-    const token = response?.data?.session?.token ?? '';
-    const idFile = response?.data?.client?.idFile ?? '';
+    // const data = {...body};
+    // const url: string = 'sessions/login';
+    // const response = await CustomAxios.post(url, data);
+    // console.log('RESP LOGIN => ', response.data);
+    // const user = response?.data?.session?.user ?? {};
+    // const token = response?.data?.session?.token ?? '';
+    // const idFile = response?.data?.client?.idFile ?? '';
+    const user = {
+      id: 23,
+      username: 'fcasasherrera@gmail.com',
+      role: {name: 'Web Developer'},
+      person: {
+        firstname: 'Fernando',
+        lastname: 'Casas',
+        birthday: '22 de abril de 1999',
+        residence: 'Jalisco',
+      },
+      created: '05/12/2023',
+      employee: {totalholidays: 12, usedholidays: 0},
+    };
+    const token = 'ASLKJFsjdjcalslks123';
+    const idFile = 1;
     await AsyncStorage.setItem('token', token);
 
     return {user: user, isLogedin: true, idFile: idFile};
@@ -48,18 +63,30 @@ export const CheckIsLogedIn = createAsyncThunk('CHECK_LOGIN', async () => {
     }
 
     const url: string = 'sessions';
-    const response: any = await CustomAxios.get(url);
+    // const response: any = await CustomAxios.get(url);
+    const user = {
+      id: 23,
+      username: 'fcasasherrera@gmail.com',
+      role: {name: 'Web Developer'},
+      person: {
+        firstname: 'Fernando',
+        lastname: 'Casas',
+        birthday: '22 de abril de 1999',
+        residence: 'Jalisco',
+      },
+      created: '05/12/2023',
+      employee: {totalholidays: 12, usedholidays: 0},
+    };
 
-    if (response.data) {
-      return {
-        user: {
-          ...response.data.session.user,
-          role: response.data.session.role,
-          employee: response.data.session.employee,
-        },
-        isLogedin: true,
-      };
-    }
+    // if (response.data) {
+    return {
+      user: {
+        ...user,
+        employee: user.employee,
+      },
+      isLogedin: true,
+    };
+    // }
   } catch (error: any) {
     console.log('ERROR LOGIN =>', error?.response.data ?? error);
     await AsyncStorage.clear();

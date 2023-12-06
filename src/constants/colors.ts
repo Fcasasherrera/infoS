@@ -26,10 +26,10 @@ export const themeLight = {
   primary: '#068DC4' /* color principal */,
   primaryLigth: '#5db9d8' /* color primario variante */,
   primarySLight:
-    'rgba(569, 130, 238, 1)' /* color primario variante Super light*/,
+    'rgba(59, 130, 238, 1)' /* color primario variante Super light*/,
   primarySLightD:
     'rgba(59, 130, 238, 0.16)' /* color primario variante Super light*/,
-  primaryProfile: 'rgba(255, 156, 45, 0.4)',
+  primaryProfile: 'rgba(109, 156, 255, 0.4)',
   whiteTransparent: 'rgba(254, 254, 254, 0.6)',
   disabled: '#C4D9EB' /* desabilitado */,
   accent: '#0C659A',
@@ -59,7 +59,7 @@ export const themeDark = {
     'rgba(59, 130, 238, 1)' /* color primario variante Super light*/,
   primarySLightD:
     'rgba(59, 130, 238, 0.16)' /* color primario variante Super light*/,
-  primaryProfile: 'rgba(255, 156, 45, 0.4)',
+  primaryProfile: 'rgba(109, 156, 255, 0.4)',
   disabled: '#FBCCB2' /* desabilitado */,
   accent: '#ed3237',
   accentLight: '#ec4a4f' /* color secundario -Seed */,

@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 import {themeLight} from '../constants/colors';
 import {CustomView} from './Containers';
+import Succes_icon from '../../assets/icons_svg/succes_icon';
 
 type BottomSheetProps = {
   visible: boolean;
@@ -52,7 +53,47 @@ export const ModalComponent: FC<BottomSheetProps> = ({
     <></>
   );
 };
+export const ModalSuccess: React.FC<BottomSheetProps> = ({
+  children,
+  visible = false,
+  alert = false,
+  hasList = false,
+  onBack,
+  style,
+  height,
+  successIcon = true,
+}) => {
+  return visible ? (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onBack}>
+      <BackContainer onPress={onBack}>
+        <Card style={style} height={height}>
+          {successIcon && <Succes_icon />}
 
+          {!alert && (
+            <HeaderModal>
+              <HeaderButton onPress={onBack}>
+                <Icon name="x" size={24} color={themeLight.black} />
+              </HeaderButton>
+            </HeaderModal>
+          )}
+          {hasList ? (
+            <CustomView>{children}</CustomView>
+          ) : (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {children}
+            </ScrollView>
+          )}
+        </Card>
+      </BackContainer>
+    </Modal>
+  ) : (
+    <></>
+  );
+};
 type CardProps = {
   theme: any;
   height?: Number | String;

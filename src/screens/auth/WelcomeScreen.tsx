@@ -55,13 +55,12 @@ const WelcomeScreen: FC = (props: any) => {
             <Image
               resizeMode="contain"
               style={styles.logoName}
-              source={require('../../../assets/images/logoName.png')}
+              source={require('../../../assets/images/logoIntra.png')}
             />
-            <Title style={{marginTop: 12}} size="medium">
-              {'Informes Corporativos'}
-            </Title>
             <Caption center={true} style={{marginTop: 12}}>
-              {'Aplicación para ver los reportes de la empresa'}
+              {
+                'El mejor aliado para llevar el control de tu desarrollo en solana'
+              }
             </Caption>
           </FadeInView>
           <Button
@@ -110,7 +109,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   logoName: {
-    width: 120,
+    height: 40,
+    marginVertical: 12,
   },
 });
 export default WelcomeScreen;

@@ -1,6 +1,35 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import ReminderIcon from '../../assets/icons_svg/reminder_icon';
+import ReleaseIcon from '../../assets/icons_svg/release_icon';
+import CuriousIcon from '../../assets/icons_svg/curious_icon';
+import UrgentIcon from '../../assets/icons_svg/urgent_icon';
+import AdviceIcon from '../../assets/icons_svg/advice_icon';
 import {SIZES, statusColor} from '../constants/colors';
+
+type ThumbnailProps = {
+  newsType: number;
+  style?: any;
+};
+
+export const Thumbnail: React.FC<ThumbnailProps> = ({newsType, style}) => {
+  return (
+    <ThumbnailContainer style={style}>
+      {/* <RedDot /> */}
+      {newsType === 1 ? (
+        <ReminderIcon size={22} color={statusColor.green} />
+      ) : newsType === 2 ? (
+        <ReleaseIcon size={22} color={statusColor.blue} />
+      ) : newsType === 3 ? (
+        <CuriousIcon size={22} color={statusColor.yellow} />
+      ) : newsType === 4 ? (
+        <UrgentIcon size={22} color={statusColor.red} />
+      ) : (
+        <AdviceIcon size={22} color={statusColor.orange} />
+      )}
+    </ThumbnailContainer>
+  );
+};
 
 type StyleProps = {
   margin?: string;
@@ -23,6 +52,9 @@ const BaseThumbnailStyles = `
 // const RedDot = styled.View`
 //   ${RedDotStyles}
 // `;
+const ThumbnailContainer = styled.View<StyleProps>`
+  ${BaseThumbnailStyles}
+`;
 export const ProfileContainer = styled.TouchableOpacity`
   width: 144px;
   height: 144px;

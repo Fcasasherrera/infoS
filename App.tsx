@@ -1,7 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import React from 'react';
+import {View} from 'react-native';
 import {ThemeProvider} from 'styled-components/native';
 import {themeLight} from './src/constants/colors';
 import {RootStack} from './src/navigation/RootStack';
@@ -14,11 +16,15 @@ const App = () => {
   const appearance = themeLight;
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={appearance}>
-        <RootStack />
-      </ThemeProvider>
-    </Provider>
+    <GestureHandlerRootView>
+      <View style={{height: '100%', width: '100%'}}>
+        <Provider store={store}>
+          <ThemeProvider theme={appearance}>
+            <RootStack />
+          </ThemeProvider>
+        </Provider>
+      </View>
+    </GestureHandlerRootView>
   );
 };
 export const getStyles = (theme: any, enable: boolean) => {
