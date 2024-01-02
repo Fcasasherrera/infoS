@@ -65,14 +65,16 @@ export const AnimatedHeader = (props: any) => {
                   }}>
                   <ProfileImageBordered
                     source={require('../../assets/images/profile.jpeg')}
-                    width={44}
-                    height={44}
+                    width={'44px'}
+                    height={'44px'}
                   />
                 </TouchableOpacity>
               </Row>
               <Row align="flex-start" style={{marginLeft: 8}}>
                 <Text size="big" white>
-                  {str('newsScreen.welcome', {name: person.firstname})}
+                  {str('newsScreen.welcome', {
+                    name: person?.name.split(' ')[0],
+                  })}
                 </Text>
                 <Text size="medium" white>
                   {str('newsScreen.headerText')}

@@ -1,19 +1,26 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC} from 'react';
 import {FadeInView} from '../../components';
 import {ContainerNoF} from '../../navigation/options';
-import {StreamChat} from 'stream-chat';
 import {ChannelList, Chat, OverlayProvider} from 'stream-chat-react-native';
-
-const client = StreamChat.getInstance('vvkgbze9b2xf');
+import {useChatClient} from '../../streamChat/useChatClient';
+import {DotIndicator} from 'react-native-indicators';
 
 const ChatHome: FC = (props: any) => {
+  const {chatClient, isConnecting, loginUser, logout, switchUser, unreadCount} =
+    useChatClient();
+  console.log(isConnecting);
+
   return (
     <ContainerNoF>
-      <FadeInView style={{marginTop: 40}} align="flex-start">
-        <OverlayProvider>
-          <Chat client={client}>{/* <ChannelList /> */}</Chat>
-        </OverlayProvider>
-      </FadeInView>
+      <OverlayProvider>
+        {isConnecting && !chatClient ? (
+          <DotIndicator color="#068DC4" />
+        ) : chatClient ? (
+          <Chat client={chatClient}>
+            <ChannelList />
+          </Chat>
+        ) : null}
+      </OverlayProvider>
     </ContainerNoF>
   );
 };

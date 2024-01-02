@@ -1,12 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {UserLoginInterface} from '../../../types/login';
 import {
-  CheckHolidays,
   CheckIsLogedIn,
   HideAlert,
   LoginAction,
   LogoutAction,
-  SetTokenPushAction,
 } from './LoginAction';
 
 interface LoginSate {
@@ -40,15 +38,6 @@ const loginReducer = createReducer(INITIAL_STATE, builder => {
     .addCase(LoginAction.rejected, state => {
       return {...state, loading: false, error: true};
     })
-    .addCase(SetTokenPushAction.pending, state => {
-      return {...state};
-    })
-    .addCase(SetTokenPushAction.fulfilled, (state, action) => {
-      return {...state, loading: false, ...action.payload};
-    })
-    .addCase(SetTokenPushAction.rejected, state => {
-      return {...state, loading: false, error: true};
-    })
     .addCase(CheckIsLogedIn.pending, state => {
       return {...state, loadingCheckIsLogged: true};
     })
@@ -57,15 +46,6 @@ const loginReducer = createReducer(INITIAL_STATE, builder => {
     })
     .addCase(CheckIsLogedIn.rejected, state => {
       return {...state, loadingCheckIsLogged: false, error: true};
-    })
-    .addCase(CheckHolidays.pending, state => {
-      return {...state, loadingHolidays: true};
-    })
-    .addCase(CheckHolidays.fulfilled, (state, action) => {
-      return {...state, loadingHolidays: false, ...action.payload};
-    })
-    .addCase(CheckHolidays.rejected, state => {
-      return {...state, loadingHolidays: false, error: true};
     })
     .addCase(HideAlert, state => {
       return {

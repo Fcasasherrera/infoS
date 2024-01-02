@@ -32,7 +32,7 @@ function renderCardNewsTop(item: any, modalOpen: any, canEdit: boolean) {
       <CustomView style={{marginLeft: SIZES.radius, flex: 1}}>
         <Text style={{...FONTS.h4}}>{item.title}</Text>
         <Caption style={{color: themeLight.captionColor}}>
-          {CustomMoment(item.created)}
+          {CustomMoment(new Date(item.created))}
         </Caption>
       </CustomView>
       {canEdit && (

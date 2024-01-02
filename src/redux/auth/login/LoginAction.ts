@@ -1,52 +1,68 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import CustomAxios from '../../../network/CustomAxios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {IsLoggedData, SessionData} from '../../../types/login';
+import moment from 'moment';
 
 interface Body {
-  username: string;
+  usuarios: string;
   password: string;
+}
+export interface SessionLType {
+  datos: SessionData;
+  mensaje: string;
+}
+export interface SessionDType {
+  datos: IsLoggedData;
+  mensaje: string;
 }
 
 export const LoginAction = createAsyncThunk('SET_LOGIN', async (body: Body) => {
   try {
-    if (body.username === '' || body.password === '') {
+    if (body.usuarios === '' || body.password === '') {
       return {
         error: true,
         errorMessage: 'loginScreen.errorMessage',
       };
     }
-    // const data = {...body};
-    // const url: string = 'sessions/login';
-    // const response = await CustomAxios.post(url, data);
-    // console.log('RESP LOGIN => ', response.data);
-    // const user = response?.data?.session?.user ?? {};
-    // const token = response?.data?.session?.token ?? '';
-    // const idFile = response?.data?.client?.idFile ?? '';
+    const data = {...body};
+    const url: string = 'login';
+    const urlHolidays: string = 'information';
+
+    const response = await CustomAxios.post(url, data);
+    const {datos}: SessionLType = response.data;
+    const responseHolidays: any = await CustomAxios.post(urlHolidays, {
+      NoNomina: datos.NoNomina,
+    });
+    const holiday: SessionDType = responseHolidays.data;
+    const ingreso = moment(holiday.datos.Ingreso, 'YYYY-MM-DD').format(
+      'DD/MM/YYYY',
+    );
     const user = {
-      id: 23,
-      username: 'fcasasherrera@gmail.com',
+      id: datos.NoNomina,
+      username: body.usuarios,
       role: {name: 'Web Developer'},
       person: {
-        firstname: 'Fernando',
-        lastname: 'Casas',
-        birthday: '22 de abril de 1999',
+        name: datos.user_display_name,
+        birthday: '',
         residence: 'Jalisco',
       },
-      created: '05/12/2023',
-      employee: {totalholidays: 12, usedholidays: 0},
+      created: ingreso,
+      employee: {
+        totalholidays: holiday.datos.Saldo_Vacacional,
+        usedholidays: 0,
+      },
     };
-    const token = 'ASLKJFsjdjcalslks123';
+    const token = (Math.random() + 2).toString(36).substring(2);
     const idFile = 1;
     await AsyncStorage.setItem('token', token);
+    await AsyncStorage.setItem('userI', JSON.stringify(user));
 
     return {user: user, isLogedin: true, idFile: idFile};
   } catch (error: any) {
     console.log('ERROR LOGIN =>', error?.response.data ?? error);
     const respError = error?.response?.data?.error ?? '';
     let errorMessage: string = 'common.error';
-    if (respError === 'Invalid credentials') {
-      errorMessage = 'requests.login.errorInvalidCredentials';
-    }
 
     return {
       error: true,
@@ -57,96 +73,24 @@ export const LoginAction = createAsyncThunk('SET_LOGIN', async (body: Body) => {
 
 export const CheckIsLogedIn = createAsyncThunk('CHECK_LOGIN', async () => {
   try {
-    const token = await AsyncStorage.getItem('token');
-    if (!token) {
+    const userI = await AsyncStorage.getItem('userI');
+    console.log(userI);
+    if (!userI) {
       return {isLogedin: false};
     }
 
-    const url: string = 'sessions';
-    // const response: any = await CustomAxios.get(url);
-    const user = {
-      id: 23,
-      username: 'fcasasherrera@gmail.com',
-      role: {name: 'Web Developer'},
-      person: {
-        firstname: 'Fernando',
-        lastname: 'Casas',
-        birthday: '22 de abril de 1999',
-        residence: 'Jalisco',
-      },
-      created: '05/12/2023',
-      employee: {totalholidays: 12, usedholidays: 0},
-    };
-
-    // if (response.data) {
     return {
       user: {
-        ...user,
-        employee: user.employee,
+        ...JSON.parse(userI),
       },
       isLogedin: true,
     };
-    // }
   } catch (error: any) {
-    console.log('ERROR LOGIN =>', error?.response.data ?? error);
+    console.log('ERROR CHECK =>', error?.response.data ?? error);
     await AsyncStorage.clear();
     return {isLogedin: false, error: false};
   }
 });
-
-export const CheckHolidays = createAsyncThunk('CHECK_HOLIDAYS', async () => {
-  try {
-    const token = await AsyncStorage.getItem('token');
-    if (!token) {
-      return {isLogedin: false};
-    }
-
-    const url: string = 'sessions';
-    const response: any = await CustomAxios.get(url);
-
-    if (response.data) {
-      return {
-        user: {
-          ...response.data.session.user,
-          role: response.data.session.role,
-          employee: response.data.session.employee,
-        },
-        isLogedin: true,
-      };
-    }
-  } catch (error: any) {
-    console.log('ERROR LOGIN =>', error?.response.data ?? error);
-    await AsyncStorage.clear();
-    return {isLogedin: false, error: false};
-  }
-});
-
-export const SetTokenPushAction = createAsyncThunk(
-  'SET_TOKEN_PUSH',
-  async (tokenPush: string) => {
-    try {
-      const data = {pushtoken: tokenPush};
-      const url: string = 'devices/pushtoken';
-
-      const response = await CustomAxios.put(url, data);
-      // console.log('RESP LOGIN => ', response.data);
-
-      return true;
-    } catch (error: any) {
-      console.log('ERROR LOGIN =>', error?.response.data ?? error);
-      const respError = error?.response?.data?.error ?? '';
-      let errorMessage: string = 'common.error';
-      if (respError === 'Invalid credentials') {
-        errorMessage = 'requests.login.errorInvalidCredentials';
-      }
-
-      return {
-        error: false,
-        errorMessage: errorMessage,
-      };
-    }
-  },
-);
 
 export const HideAlert = createAction('HIDE_ALERT');
 

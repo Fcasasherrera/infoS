@@ -95,7 +95,7 @@ function Container() {
               tabBarIcon: ({color}) => <HomeIcon size={24} color={color} />,
             }}
           />
-          <Screen
+          {/* <Screen
             name="RequestStack"
             component={RequestStack}
             options={{
@@ -104,7 +104,7 @@ function Container() {
                 <NotificationIcon size={24} color={color} />
               ),
             }}
-          />
+          /> */}
           <Screen
             name="NotificationsScreen"
             component={NotificationsList}
@@ -113,14 +113,14 @@ function Container() {
               tabBarIcon: ({color}) => <FileIcon size={24} color={color} />,
             }}
           />
-          <Screen
+          {/* <Screen
             name="ChatScreen"
             component={ChatHome}
             options={{
               tabBarLabel: str('chatScreens.tabBarLabel'),
               tabBarIcon: ({color}) => <ChatIcon size={24} color={color} />,
             }}
-          />
+          /> */}
         </Navigator>
       )}
     </>

@@ -152,6 +152,7 @@
     "tabBarLabel": "Profile",
     "employeeNumber": "Employee number",
     "daysOfHolidays": "Remaining holidays",
+    "user": "Username",
     "email": "Email",
     "name": "Name",
     "bornDate": "Born date",

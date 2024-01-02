@@ -2,7 +2,7 @@ import moment from 'moment';
 import {localLang} from '../locales/Locale';
 import 'moment/locale/es';
 
-export const CustomMoment = (date: string, format?: string | undefined) =>
+export const CustomMoment = (date: Date, format?: string | undefined) =>
   moment(date)
     .locale(localLang)
     .format(format ?? 'MMMM D, YYYY');

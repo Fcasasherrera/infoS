@@ -7,7 +7,8 @@ import IncapacityIcon from '../../assets/icons_svg/incapacity_icon';
 import OtherRequestIcon from '../../assets/icons_svg/other_request_icon';
 import {requestStatusColor} from './colors';
 
-export const BASE_URL: string = 'https://stg-crossappapi.atomic32.com/api/v2/';
+export const BASE_URL: string =
+  'https://app.solana.com.mx/informes_corporativos/apimovil/';
 export const BASE_URL_FILES: string = 'https://stg-crossappapi.atomic32.com/';
 
 export const TIMEOUT: number = 100000;

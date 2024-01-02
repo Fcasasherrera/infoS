@@ -82,7 +82,7 @@ export const ProfilePadding = styled.View`
   border-color: ${(props: StyleProps) => props.theme.primaryProfile};
   background-color: ${(props: StyleProps) => props.theme.white};
   border-radius: 250px;
-  padding: 6px;
+  padding: 4px;
 `;
 export const ProfileImage = styled.Image<StyleProps>`
   border-radius: 250px;

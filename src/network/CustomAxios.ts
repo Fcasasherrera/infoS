@@ -6,7 +6,7 @@ const config = {
   baseURL: BASE_URL,
   timeout: TIMEOUT,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
   },
 };
 

@@ -154,7 +154,7 @@ const CommunicatesListScreen: FC = (props: any) => {
                   }}
                   item={item}
                   token={token}
-                  canEdit={validateUserNews(role.name)}
+                  canEdit={validateUserNews(role?.name)}
                 />
                 <Hr />
               </CustomView>
@@ -165,7 +165,7 @@ const CommunicatesListScreen: FC = (props: any) => {
               </CustomView>
             )}
           </ScrollView>
-          {validateUserNews(role.name) && (
+          {validateUserNews(role?.name) && (
             <CustomView bottom={'16'} position={'absolute'}>
               <ButtonNewRequest
                 onPress={() => navigation.navigate('NewCommunicate')}>

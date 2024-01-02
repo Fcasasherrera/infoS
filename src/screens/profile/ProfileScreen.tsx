@@ -29,7 +29,7 @@ import {invertedGradients, themeLight} from '../../constants/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import FIcon from 'react-native-vector-icons/AntDesign';
-import {CheckHolidays, LogoutAction} from '../../redux/auth/login/LoginAction';
+import {LogoutAction} from '../../redux/auth/login/LoginAction';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {ContainerNoF} from '../../navigation/options';
 import {loginSelector} from '../../redux/auth/login/LoginSelector';
@@ -50,10 +50,10 @@ const ProfileScreen: FC = (props: any) => {
   const [imgUser, setImgUser] = useState<any>();
   const [file, setFile] = useState<any>(null);
   const dispatch = useAppDispatch();
+  console.log(user, 'user aqui');
 
   useEffect(() => {
     const checkToken = async () => {
-      dispatch(CheckHolidays());
       const resultToken = await AsyncStorage.getItem('token');
       setToken(resultToken);
     };
@@ -98,7 +98,7 @@ const ProfileScreen: FC = (props: any) => {
             <RefreshControl
               refreshing={loading}
               onRefresh={() => {
-                dispatch(CheckHolidays());
+                console.log('holiodaydlaksjdf');
               }}
             />
           }
@@ -113,14 +113,14 @@ const ProfileScreen: FC = (props: any) => {
             </TouchableOpacity> */}
           </Row>
           <Row align="flex-start" style={{marginVertical: 16}}>
-            <Subtitle>{str('profileScreen.email')}</Subtitle>
+            <Subtitle>{str('profileScreen.user')}</Subtitle>
             <Caption>{user?.username}</Caption>
           </Row>
           <Row align="flex-start" style={{marginBottom: 16}}>
             <Subtitle>{str('profileScreen.bornDate')}</Subtitle>
             <Caption>
-              {user?.person.birthday
-                ? user?.person.birthday
+              {user?.person?.birthday
+                ? user?.person?.birthday
                 : str('profileScreen.noEntry')}
             </Caption>
           </Row>
@@ -131,8 +131,8 @@ const ProfileScreen: FC = (props: any) => {
           <Row align="flex-start" style={{marginBottom: 16}}>
             <Subtitle>{str('profileScreen.residence')}</Subtitle>
             <Caption>
-              {user?.person.residence
-                ? user?.person.residence
+              {user?.person?.residence
+                ? user?.person?.residence
                 : str('profileScreen.noEntry')}
             </Caption>
           </Row>
@@ -187,14 +187,14 @@ const ProfileScreen: FC = (props: any) => {
                   source={
                     imgUser
                       ? `${BASE_URL_FILES}files/${user.person.idFile}?token=${token}`
-                      : require('../../../assets/images/profile.jpeg')
+                      : require('../../../assets/images/profile-default.jpg')
                   }
                 />
               </ProfilePadding>
 
               {/* Test image Picker */}
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => setVisibleModal(true)}
                 style={styles.btnimage}>
                 <FontAwesome
@@ -202,13 +202,13 @@ const ProfileScreen: FC = (props: any) => {
                   color={themeLight.primaryLigth}
                   size={12}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               {/* end test */}
             </ProfileContainer>
             <Row align="flex-start" style={{width: '65%', paddingLeft: 12}}>
-              <Title>{`${user?.person.firstname} ${user?.person.lastname}`}</Title>
-              <Caption size="medium">{user?.role.name}</Caption>
+              <Title>{`${user?.person?.name}`}</Title>
+              <Caption size="medium">{user?.role?.name}</Caption>
               <Caption>
                 {str('profileScreen.employeeNumber')}: {user?.id}
               </Caption>

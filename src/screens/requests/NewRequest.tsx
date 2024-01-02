@@ -29,7 +29,6 @@ import {sendFileAction} from '../../redux/files/SendFileAction';
 import {typesRequestsCreate} from '../../constants/.env';
 import {BodyNewRequest} from '../../types/requests';
 import {loginSelector} from '../../redux/auth/login/LoginSelector';
-import {CheckHolidays} from '../../redux/auth/login/LoginAction';
 import {
   calculateDifferenceWeekDays,
   CustomMoment,
@@ -142,12 +141,6 @@ const NewRequest = (props: any) => {
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    const checkToken = async () => {
-      dispatch(CheckHolidays());
-    };
-    checkToken();
-  }, []);
 
   useEffect(() => {
     if (form.id === '2') {

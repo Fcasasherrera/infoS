@@ -19,26 +19,27 @@ const LoginScreen: FC = () => {
   const dispacth = useAppDispatch();
   const {loading, error, errorMessage} = useAppSelector(loginSelector);
   const [form, onChange] = useState({
-    username: 'fcasasherrera@gmail.com',
-    password: '123456',
+    // usuario:gs.jessep.martinez y contraseña: ;;3d*:Jz7jyG!Wzm
+    usuarios: 'gs.jessep.martinez',
+    password: ';;3d*:Jz7jyG!Wzm',
     checkTextInputChange: false,
     isValidEmail: true,
     isValidPassword: true,
   });
 
   const emailInputChange = (text: string) => {
-    const regx = /^([A-Za-z0-9_\-\.])+\@([[A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    if (text === '' || regx.test(text)) {
+    const splitedText = text.split('.');
+    if (text === '' || splitedText.length === 3) {
       onChange({
         ...form,
-        username: text,
+        usuarios: text,
         checkTextInputChange: true,
         isValidEmail: true,
       });
     } else {
       onChange({
         ...form,
-        username: text,
+        usuarios: text,
         checkTextInputChange: false,
         isValidEmail: false,
       });
@@ -68,14 +69,14 @@ const LoginScreen: FC = () => {
       form.isValidEmail &&
       form.isValidPassword &&
       form.password &&
-      form.username !== ''
+      form.usuarios !== ''
     ) {
       return true;
     }
   };
 
   const post = () => {
-    dispacth(LoginAction({username: form.username, password: form.password}));
+    dispacth(LoginAction({usuarios: form.usuarios, password: form.password}));
   };
 
   return (
@@ -99,9 +100,9 @@ const LoginScreen: FC = () => {
             <CustomInput
               error={!form.isValidEmail}
               label={'Usuario'}
-              errorLabel={'Ingresa un correo válido'}
-              placeholder={'Ingresa tu correo electrónico'}
-              value={form.username}
+              errorLabel={'Ingresa un usuario válido'}
+              placeholder={'Ingresa su nombre de usuario'}
+              value={form.usuarios}
               onChange={emailInputChange}
               isLoading={loading}
             />
